@@ -2,6 +2,16 @@
 
 Shared platform API for vacation rental operators — core backend services consumed by multiple products (booking engine, channel manager, owner portal).
 
+## Screenshots
+
+| Dashboard | Properties |
+|:-:|:-:|
+| ![Dashboard](docs/screenshots/dashboard.jpeg) | ![Properties](docs/screenshots/properties.jpg) |
+
+| Bookings | AI Assistant |
+|:-:|:-:|
+| ![Bookings](docs/screenshots/bookings.jpg) | ![AI Assistant](docs/screenshots/ai-assistant.jpeg) |
+
 ## Architecture Overview
 
 ```
