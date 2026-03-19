@@ -49,6 +49,8 @@ resource "aws_s3_bucket_lifecycle_configuration" "logs" {
     id     = "expire-old-logs"
     status = "Enabled"
 
+    filter {}  # Apply to all objects in bucket
+
     transition {
       days          = 30
       storage_class = "STANDARD_IA"   # ~40% cheaper, same durability

@@ -35,6 +35,10 @@ generate_pdf.py
 DEMO_SCRIPT.md
 INTERVIEW_TALKING_POINTS.md
 
+# Terraform
+infrastructure/terraform/.terraform/
+infrastructure/terraform/*.tfstate*
+
 # Logs
 *.log
 npm-debug.log*
