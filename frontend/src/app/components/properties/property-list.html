@@ -1,0 +1,63 @@
+<div class="page">
+  <div class="page-header">
+    <h1>Properties</h1>
+    <a routerLink="/properties/new" class="btn btn-primary">+ Add Property</a>
+  </div>
+
+  <div class="filters">
+    <input
+      type="text"
+      [(ngModel)]="filters.city"
+      (ngModelChange)="onFilterChange()"
+      placeholder="Filter by city..."
+      class="input"
+    />
+    <select [(ngModel)]="filters.status" (ngModelChange)="onFilterChange()" class="input">
+      <option value="">All statuses</option>
+      <option value="active">Active</option>
+      <option value="inactive">Inactive</option>
+      <option value="draft">Draft</option>
+    </select>
+  </div>
+
+  <div class="property-grid">
+    @for (property of properties(); track property.id) {
+      <div class="property-card">
+        <div class="card-header">
+          <h3>{{ property.name }}</h3>
+          <span class="badge badge--{{ property.status }}">{{ property.status }}</span>
+        </div>
+        <p class="location">{{ property.city }}, {{ property.state }}</p>
+        <div class="card-details">
+          <span>{{ property.bedrooms }} bed</span>
+          <span>{{ property.bathrooms }} bath</span>
+          <span>{{ property.max_guests }} guests</span>
+        </div>
+        <div class="card-footer">
+          <span class="price">{{ property.base_price_cents / 100 | currency }}/night</span>
+          <div class="card-actions">
+            <a [routerLink]="['/properties', property.id]" class="btn btn-sm">View</a>
+            <button (click)="regenerateDescription(property)" class="btn btn-sm btn-outline" title="Regenerate AI description">
+              AI
+            </button>
+          </div>
+        </div>
+        @if (property.ai_description) {
+          <p class="ai-description">
+            {{ property.ai_description | slice:0:120 }}...
+          </p>
+        }
+      </div>
+    } @empty {
+      <p class="empty-state">No properties found.</p>
+    }
+  </div>
+
+  @if (totalPages() > 1) {
+    <div class="pagination">
+      <button (click)="changePage(currentPage() - 1)" [disabled]="currentPage() === 1" class="btn btn-sm">Previous</button>
+      <span>Page {{ currentPage() }} of {{ totalPages() }}</span>
+      <button (click)="changePage(currentPage() + 1)" [disabled]="currentPage() === totalPages()" class="btn btn-sm">Next</button>
+    </div>
+  }
+</div>

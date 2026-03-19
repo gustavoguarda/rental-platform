@@ -1,0 +1,95 @@
+<div class="page">
+  <h1>AI Assistant</h1>
+
+  <div class="ai-grid">
+    <!-- Guest Communication -->
+    <section class="ai-section">
+      <h2>Guest Communication</h2>
+      <p class="section-desc">Generate AI-powered responses to guest messages.</p>
+
+      <div class="form-group">
+        <label>Property</label>
+        <select [(ngModel)]="selectedPropertyId" class="input">
+          <option [value]="0">Select a property...</option>
+          @for (p of properties(); track p.id) {
+            <option [value]="p.id">{{ p.name }}</option>
+          }
+        </select>
+      </div>
+
+      <div class="chat-window">
+        @for (msg of chatMessages(); track $index) {
+          <div class="chat-message" [class.user]="msg.role === 'user'" [class.assistant]="msg.role === 'assistant'">
+            <div class="message-bubble">{{ msg.content }}</div>
+            <small class="message-time">{{ msg.timestamp | date:'shortTime' }}</small>
+          </div>
+        }
+      </div>
+
+      <div class="chat-input">
+        <input
+          [(ngModel)]="guestMessage"
+          (keyup.enter)="sendGuestMessage()"
+          placeholder="Type a guest message to get AI response..."
+          class="input"
+          [disabled]="!selectedPropertyId || chatLoading()"
+        />
+        <button
+          (click)="sendGuestMessage()"
+          [disabled]="!guestMessage || !selectedPropertyId || chatLoading()"
+          class="btn btn-primary"
+        >
+          {{ chatLoading() ? '...' : 'Send' }}
+        </button>
+      </div>
+    </section>
+
+    <!-- Pricing Suggestion -->
+    <section class="ai-section">
+      <h2>Pricing Intelligence</h2>
+      <p class="section-desc">Get AI-powered pricing recommendations based on market data.</p>
+
+      <div class="form-group">
+        <label>Property</label>
+        <select [(ngModel)]="pricingPropertyId" class="input">
+          <option [value]="0">Select a property...</option>
+          @for (p of properties(); track p.id) {
+            <option [value]="p.id">{{ p.name }}</option>
+          }
+        </select>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label>Occupancy Rate (%)</label>
+          <input [(ngModel)]="occupancyRate" type="number" min="0" max="100" class="input" />
+        </div>
+        <div class="form-group">
+          <label>Avg Market Rate ($)</label>
+          <input [(ngModel)]="avgMarketRate" type="number" min="0" class="input" />
+        </div>
+      </div>
+
+      <button
+        (click)="getPricingSuggestion()"
+        [disabled]="!pricingPropertyId || pricingLoading()"
+        class="btn btn-primary"
+      >
+        {{ pricingLoading() ? 'Analyzing...' : 'Get AI Suggestion' }}
+      </button>
+
+      @if (pricingSuggestion(); as suggestion) {
+        <div class="suggestion-card">
+          <div class="suggestion-header">AI Pricing Recommendation</div>
+          <div class="suggestion-price">
+            {{ suggestion.suggested_price | currency }}/night
+          </div>
+          <div class="suggestion-confidence">
+            Confidence: {{ suggestion.confidence * 100 | number:'1.0-0' }}%
+          </div>
+          <p class="suggestion-reasoning">{{ suggestion.reasoning }}</p>
+        </div>
+      }
+    </section>
+  </div>
+</div>

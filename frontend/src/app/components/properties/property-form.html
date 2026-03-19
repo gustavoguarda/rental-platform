@@ -1,0 +1,73 @@
+<div class="page">
+  <h1>Add New Property</h1>
+
+  <form [formGroup]="form" (ngSubmit)="onSubmit()" class="form">
+    <div class="form-grid">
+      <div class="form-group full-width">
+        <label>Property Name</label>
+        <input formControlName="name" class="input" placeholder="Sunset Beach Villa" />
+      </div>
+
+      <div class="form-group full-width">
+        <label>Description</label>
+        <textarea formControlName="description" class="input textarea" rows="3"
+          placeholder="Brief description (AI will generate a full listing)"></textarea>
+      </div>
+
+      <div class="form-group full-width">
+        <label>Address</label>
+        <input formControlName="address" class="input" placeholder="123 Ocean Drive" />
+      </div>
+
+      <div class="form-group">
+        <label>City</label>
+        <input formControlName="city" class="input" placeholder="Miami Beach" />
+      </div>
+      <div class="form-group">
+        <label>State</label>
+        <input formControlName="state" class="input" placeholder="FL" />
+      </div>
+      <div class="form-group">
+        <label>Country</label>
+        <input formControlName="country" class="input" />
+      </div>
+
+      <div class="form-group">
+        <label>Bedrooms</label>
+        <input formControlName="bedrooms" type="number" class="input" />
+      </div>
+      <div class="form-group">
+        <label>Bathrooms</label>
+        <input formControlName="bathrooms" type="number" class="input" />
+      </div>
+      <div class="form-group">
+        <label>Max Guests</label>
+        <input formControlName="max_guests" type="number" class="input" />
+      </div>
+
+      <div class="form-group">
+        <label>Base Price ($/night)</label>
+        <input formControlName="basePriceDollars" type="number" step="0.01" class="input" />
+      </div>
+      <div class="form-group">
+        <label>Status</label>
+        <select formControlName="status" class="input">
+          <option value="draft">Draft</option>
+          <option value="active">Active</option>
+          <option value="inactive">Inactive</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="form-actions">
+      <button type="button" (click)="cancel()" class="btn btn-outline">Cancel</button>
+      <button type="submit" [disabled]="form.invalid || submitting()" class="btn btn-primary">
+        {{ submitting() ? 'Creating...' : 'Create Property' }}
+      </button>
+    </div>
+
+    @if (error()) {
+      <p class="error">{{ error() }}</p>
+    }
+  </form>
+</div>

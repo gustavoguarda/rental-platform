@@ -1,0 +1,83 @@
+.page { padding: 24px; max-width: 1200px; margin: 0 auto; }
+h1 { font-size: 24px; font-weight: 600; margin-bottom: 24px; }
+h2 { font-size: 18px; font-weight: 600; margin-bottom: 8px; }
+.section-desc { color: #6b7280; font-size: 14px; margin-bottom: 16px; }
+
+.ai-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  @media (max-width: 768px) { grid-template-columns: 1fr; }
+}
+
+.ai-section {
+  background: white;
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.form-group { margin-bottom: 14px; display: flex; flex-direction: column; }
+.form-group label { font-size: 13px; font-weight: 500; color: #374151; margin-bottom: 6px; }
+.form-row { display: flex; gap: 12px; }
+.form-row .form-group { flex: 1; }
+
+.input {
+  padding: 10px 14px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  font-size: 14px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.chat-window {
+  height: 280px;
+  overflow-y: auto;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  padding: 12px;
+  margin-bottom: 12px;
+  background: #f9fafb;
+}
+
+.chat-message {
+  margin-bottom: 12px;
+  display: flex;
+  flex-direction: column;
+  &.user { align-items: flex-end; }
+  &.assistant { align-items: flex-start; }
+}
+
+.message-bubble {
+  max-width: 80%;
+  padding: 10px 14px;
+  border-radius: 12px;
+  font-size: 14px;
+  line-height: 1.5;
+
+  .user & { background: #3b82f6; color: white; }
+  .assistant & { background: white; border: 1px solid #e5e7eb; }
+}
+
+.message-time { font-size: 11px; color: #9ca3af; margin-top: 4px; }
+
+.chat-input { display: flex; gap: 8px; }
+.chat-input .input { flex: 1; }
+
+.btn { padding: 10px 20px; border: none; border-radius: 8px; cursor: pointer; font-size: 14px; }
+.btn-primary { background: #3b82f6; color: white; }
+.btn-primary:disabled { opacity: 0.5; cursor: not-allowed; }
+
+.suggestion-card {
+  margin-top: 16px;
+  padding: 16px;
+  background: #f0fdf4;
+  border-radius: 8px;
+  border: 1px solid #bbf7d0;
+}
+
+.suggestion-header { font-size: 13px; font-weight: 600; color: #065f46; margin-bottom: 8px; }
+.suggestion-price { font-size: 28px; font-weight: 700; color: #059669; }
+.suggestion-confidence { font-size: 13px; color: #6b7280; margin-bottom: 8px; }
+.suggestion-reasoning { font-size: 14px; color: #374151; margin: 0; }

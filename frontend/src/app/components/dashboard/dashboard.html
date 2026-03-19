@@ -1,0 +1,84 @@
+<div class="dashboard">
+  <h1>Rental Platform Dashboard</h1>
+
+  <div class="stats-grid">
+    <div class="stat-card">
+      <span class="stat-value">{{ totalProperties() }}</span>
+      <span class="stat-label">Properties</span>
+    </div>
+    <div class="stat-card">
+      <span class="stat-value">{{ pendingBookings() }}</span>
+      <span class="stat-label">Pending Bookings</span>
+    </div>
+    <div class="stat-card">
+      <span class="stat-value">{{ confirmedBookings() }}</span>
+      <span class="stat-label">Confirmed Bookings</span>
+    </div>
+    <div class="stat-card">
+      <span class="stat-value">{{ totalRevenue() | currency }}</span>
+      <span class="stat-label">Revenue</span>
+    </div>
+  </div>
+
+  <div class="content-grid">
+    <section class="recent-bookings">
+      <div class="section-header">
+        <h2>Recent Bookings</h2>
+        <a routerLink="/bookings" class="view-all">View all</a>
+      </div>
+      @if (recentBookings().length > 0) {
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>Guest</th>
+              <th>Property</th>
+              <th>Check-in</th>
+              <th>Status</th>
+              <th>Total</th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (booking of recentBookings(); track booking.id) {
+              <tr>
+                <td>{{ booking.guest_name }}</td>
+                <td>{{ booking.property?.name || 'N/A' }}</td>
+                <td>{{ booking.check_in | date:'mediumDate' }}</td>
+                <td>
+                  <span class="badge badge--{{ booking.status }}">
+                    {{ booking.status }}
+                  </span>
+                </td>
+                <td>{{ booking.total_price_cents / 100 | currency }}</td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      } @else {
+        <p class="empty-state">No bookings yet.</p>
+      }
+    </section>
+
+    <section class="properties-summary">
+      <div class="section-header">
+        <h2>Properties</h2>
+        <a routerLink="/properties" class="view-all">View all</a>
+      </div>
+      <div class="property-list">
+        @for (property of properties(); track property.id) {
+          <div class="property-card-mini">
+            <div class="property-info">
+              <strong>{{ property.name }}</strong>
+              <span class="property-location">{{ property.city }}, {{ property.state }}</span>
+            </div>
+            <div class="property-meta">
+              <span>{{ property.bedrooms }}bd / {{ property.bathrooms }}ba</span>
+              <span class="property-price">{{ property.base_price_cents / 100 | currency }}/night</span>
+            </div>
+          </div>
+        } @empty {
+          <p class="empty-state">No properties yet.</p>
+        }
+      </div>
+    </section>
+  </div>
+</div>

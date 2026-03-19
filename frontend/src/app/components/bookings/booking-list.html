@@ -1,0 +1,62 @@
+<div class="page">
+  <div class="page-header">
+    <h1>Bookings</h1>
+    <select [(ngModel)]="statusFilter" (ngModelChange)="loadBookings()" class="input">
+      <option value="">All statuses</option>
+      <option value="pending">Pending</option>
+      <option value="confirmed">Confirmed</option>
+      <option value="cancelled">Cancelled</option>
+    </select>
+  </div>
+
+  @if (bookings().length > 0) {
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Guest</th>
+          <th>Property</th>
+          <th>Check-in</th>
+          <th>Check-out</th>
+          <th>Guests</th>
+          <th>Total</th>
+          <th>Channel</th>
+          <th>Status</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (booking of bookings(); track booking.id) {
+          <tr>
+            <td>#{{ booking.id }}</td>
+            <td>
+              <div>{{ booking.guest_name }}</div>
+              <small class="text-muted">{{ booking.guest_email }}</small>
+            </td>
+            <td>{{ booking.property?.name || 'N/A' }}</td>
+            <td>{{ booking.check_in | date:'mediumDate' }}</td>
+            <td>{{ booking.check_out | date:'mediumDate' }}</td>
+            <td>{{ booking.guests_count }}</td>
+            <td>{{ booking.total_price_cents / 100 | currency }}</td>
+            <td>{{ booking.source_channel || 'direct' }}</td>
+            <td>
+              <span class="badge badge--{{ booking.status }}">{{ booking.status }}</span>
+            </td>
+            <td>
+              <div class="actions">
+                @if (booking.status === 'pending') {
+                  <button (click)="confirm(booking)" class="btn btn-sm btn-success">Confirm</button>
+                }
+                @if (booking.status !== 'cancelled') {
+                  <button (click)="cancel(booking)" class="btn btn-sm btn-danger">Cancel</button>
+                }
+              </div>
+            </td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  } @else {
+    <p class="empty-state">No bookings found.</p>
+  }
+</div>

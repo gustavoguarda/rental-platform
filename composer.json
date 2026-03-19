@@ -1,0 +1,42 @@
+{
+    "name": "rental-platform/api",
+    "description": "Shared platform API for vacation rental operators",
+    "type": "project",
+    "require": {
+        "php": "^8.2",
+        "laravel/framework": "^11.0",
+        "openai-php/laravel": "^0.10",
+        "aws/aws-sdk-php": "^3.300",
+        "predis/predis": "^2.2",
+        "laravel/tinker": "^3.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^10.5",
+        "laravel/pint": "^1.13",
+        "phpstan/phpstan": "^1.10",
+        "pestphp/pest": "^2.34",
+        "mockery/mockery": "^1.6",
+        "fakerphp/faker": "^1.24"
+    },
+    "autoload": {
+        "psr-4": {
+            "App\\": "app/",
+            "Database\\": "database/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests/"
+        }
+    },
+    "scripts": {
+        "test": "pest",
+        "lint": "pint",
+        "analyse": "phpstan analyse"
+    },
+    "config": {
+        "allow-plugins": {
+            "pestphp/pest-plugin": true
+        }
+    }
+}

@@ -1,0 +1,40 @@
+# Dependencies
+/vendor/
+/node_modules/
+frontend/node_modules/
+frontend/.angular/
+frontend/dist/
+
+# Environment
+.env
+!.env.example
+
+# Laravel
+storage/
+bootstrap/cache/
+.phpunit.result.cache
+phpunit.result.cache
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Claude Code
+.claude/
+
+# Interview-specific files (not for public repo)
+*.eml
+*.pdf
+generate_pdf.py
+DEMO_SCRIPT.md
+INTERVIEW_TALKING_POINTS.md
+
+# Logs
+*.log
+npm-debug.log*

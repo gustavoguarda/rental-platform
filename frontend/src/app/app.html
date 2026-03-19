@@ -1,0 +1,33 @@
+<div class="app-layout">
+  <nav class="sidebar">
+    <div class="sidebar-brand">
+      <span class="brand-icon">R</span>
+      <span class="brand-text">Rental Platform</span>
+    </div>
+    <ul class="nav-list">
+      <li>
+        <a routerLink="/dashboard" routerLinkActive="active" class="nav-link">
+          Dashboard
+        </a>
+      </li>
+      <li>
+        <a routerLink="/properties" routerLinkActive="active" class="nav-link">
+          Properties
+        </a>
+      </li>
+      <li>
+        <a routerLink="/bookings" routerLinkActive="active" class="nav-link">
+          Bookings
+        </a>
+      </li>
+      <li>
+        <a routerLink="/ai" routerLinkActive="active" class="nav-link">
+          AI Assistant
+        </a>
+      </li>
+    </ul>
+  </nav>
+  <main class="main-content">
+    <router-outlet />
+  </main>
+</div>
